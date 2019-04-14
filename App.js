@@ -1,16 +1,17 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './reducers';
-import Kwiz from './components/Kwiz';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './src/reducers';
+import Kwiz from './src/components/Kwiz';
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 export default class App extends React.Component {
   render() {
-  // return (<View><Text>yooo</Text></View>);
     return (
       <Provider store={store}>
         <Kwiz/>

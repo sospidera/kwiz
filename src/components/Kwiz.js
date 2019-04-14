@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import StartScreen from './StartScreen';
 import QuestionScreen from './QuestionScreen';
 import EndScreen from './EndScreen';
-
-asdf = "ASDF";
-qwerty = "QWERTY";
+import { Platform, StatusBar} from 'react-native';
+import FlashMessage from 'react-native-flash-message';
 
 class Kwiz extends React.Component {
 
@@ -27,27 +26,23 @@ class Kwiz extends React.Component {
     return (
       <View style={styles.container}>
         {this.currentScreen()}
+        <FlashMessage position='top'/>
       </View>
     );
   }
 };
+
+const mapStateToProps = (state) => state;
+export default connect(mapStateToProps)(Kwiz);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'space-between',
+    backgroundColor: '#c3c3c3',
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+  }
 });
 
-const mapStateToProps = (state) => state;
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     begin: (nextStage) => dispatch({ type: "BEGIN_QUIZ" })
-//     begin: (nextStage) => dispatch({ type: "BEGIN_QUIZ" })
-//   };
-// };
-
-export default connect(mapStateToProps)(Kwiz);
